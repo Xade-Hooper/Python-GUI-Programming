@@ -10,7 +10,10 @@ class HelloView(tk.Frame):
         self.number_x = tk.StringVar()
         self.number_y = tk.StringVar()
         self.number_string = tk.StringVar()
-        self.number_string.set("Put in dos whole numeros to get sum")
+        self.ans_string = tk.StringVar()
+        self.number_string.set("Put in 2 numeros to add")
+        self.ans_string.set("Sum is")
+
         self.name = tk.StringVar()
         self.hello_string = tk.StringVar()
         self.hello_string.set("Hello World")
@@ -25,17 +28,23 @@ class HelloView(tk.Frame):
         number_x_entry = ttk.Entry(self,textvariable=self.number_x)
         number_y_entry = ttk.Entry(self,textvariable=self.number_y)
         number_label = ttk.Label(self, textvariable=self.number_string,
-                               font=("TkDefaultFont", 64), wraplength=600)
+                               font=("TkDefaultFont", 59), wraplength=600)
+        number_label.config(background='orange')
+        ans_label = ttk.Label(self, textvariable=self.answer_string,
+                               font=("TkDefaultFont", 59), wraplength=600)
+        ans_label.config(background='orange')
         n_sum_button = ttk.Button(self, text="mathplosion",command=self.math_it())
+
         #Layout form
         name_label.grid(row=0, column=0, sticky=tk.W)
         name_entry.grid(row=0,column=1,sticky=(tk.W + tk.E))
         ch_button.grid(row=0, column=2, sticky=tk.E)
         hello_label.grid(row=1, column=0, columnspan=3)
-        #number_x_entry(row=0, column=1, sticky=tk.W)
-        #number_y_entry(row=2, column=1, sticky=tk.W)
-        number_label(row=2,column=0,columnspan=3)
-        n_sum_button.grid(row=3,column=3, sticky=tk.E)
+        number_x_entry.grid(row=4, column=0, sticky=tk.W)
+        number_y_entry.grid(row=3, column=0, sticky=tk.W)
+        number_label.grid(row=2,column=0,columnspan=3)
+        ans_label.grid(row=5,column=0,columnspan=3)
+        n_sum_button.grid(row=4,column=3, sticky=tk.E)
 
         self.columnconfigure(1, weight=1)
 
@@ -47,9 +56,12 @@ class HelloView(tk.Frame):
 
     def math_it(self):
         if self.number_x.get() + self.number_y.get():
+            int(self.number_x.get())
+            int(self.number_y.get())
             sum = self.number_x.get() + self.number_y.get()
-            self.number_string.set("And the answer is" + sum)
-
+            self.ans_string.set("And the answer is" + sum)
+        else:
+            self.ans_string.set("And the sum is")
 
 class MyApplication(tk.Tk):
     """Hello World Main Application"""
