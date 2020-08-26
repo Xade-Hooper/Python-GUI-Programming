@@ -16,7 +16,7 @@ class HelloView(tk.Frame):
 
         self.name = tk.StringVar()
         self.hello_string = tk.StringVar()
-        self.hello_string.set("Hello World")
+        self.hello_string.set("")
         self.config(background='orange')
 
         name_label = ttk.Label(self, text="Name:")
@@ -30,10 +30,10 @@ class HelloView(tk.Frame):
         number_label = ttk.Label(self, textvariable=self.number_string,
                                font=("TkDefaultFont", 59), wraplength=600)
         number_label.config(background='orange')
-        ans_label = ttk.Label(self, textvariable=self.answer_string,
+        ans_label = ttk.Label(self, textvariable=self.ans_string,
                                font=("TkDefaultFont", 59), wraplength=600)
         ans_label.config(background='orange')
-        n_sum_button = ttk.Button(self, text="mathplosion",command=self.math_it())
+        n_sum_button = ttk.Button(self, text="mathplosion",command=self.math_it)
 
         #Layout form
         name_label.grid(row=0, column=0, sticky=tk.W)
@@ -41,25 +41,26 @@ class HelloView(tk.Frame):
         ch_button.grid(row=0, column=2, sticky=tk.E)
         hello_label.grid(row=1, column=0, columnspan=3)
         number_x_entry.grid(row=4, column=0, sticky=tk.W)
-        number_y_entry.grid(row=3, column=0, sticky=tk.W)
-        number_label.grid(row=2,column=0,columnspan=3)
-        ans_label.grid(row=5,column=0,columnspan=3)
-        n_sum_button.grid(row=4,column=3, sticky=tk.E)
+        number_y_entry.grid(row=5, column=0, sticky=tk.W)
+        number_label.grid(row=4,column=1,columnspan=1)
+        ans_label.grid(row=5,column=1,columnspan=1)
+        n_sum_button.grid(row=6,column=0, sticky=tk.E)
 
         self.columnconfigure(1, weight=1)
 
     def on_change(self):
         if self.name.get().strip():
             self.hello_string.set("Hello " + self.name.get())
+            self.ans_string.set("testing answer label")
         else:
-            self.hello_string.set("Hello World")
+            self.hello_string.set("")
 
     def math_it(self):
-        if self.number_x.get() + self.number_y.get():
-            int(self.number_x.get())
-            int(self.number_y.get())
-            sum = self.number_x.get() + self.number_y.get()
-            self.ans_string.set("And the answer is" + sum)
+        if self.number_x.get() != "" :
+            x = int(self.number_x.get())
+            y = int(self.number_y.get())
+            answer = x + y
+            self.ans_string.set("And the answer is = " + str(answer))
         else:
             self.ans_string.set("And the sum is")
 
