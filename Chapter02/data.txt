@@ -1,1 +1,0 @@
-Number PY_VAR0 and number PY_VAR1 equals 15

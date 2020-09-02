@@ -70,9 +70,9 @@ class HelloView(tk.Frame):
             x = int(self.number_x.get())
             y = int(self.number_y.get())
             answer = x + y
-            numbers = [f'{str(self.number_x)} and ', f'{str(self.number_y)} equals 'f'{str(answer)}/n']
+            numbers_summed = [f'{str(x)} and {str(y)} equals {str(answer)}']
             csv_writer = csv.writer(csv_file)
-            csv_writer.writerow(numbers)
+            csv_writer.writerow(numbers_summed)
 
 class MyApplication(tk.Tk):
     """Hello World Main Application"""
