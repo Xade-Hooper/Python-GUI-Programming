@@ -1,6 +1,7 @@
 """A better Hello World for Tkinter"""
 import tkinter as tk
 from tkinter import ttk
+import csv
 
 class HelloView(tk.Frame):
     """A friendly liltle module"""
@@ -33,7 +34,7 @@ class HelloView(tk.Frame):
         ans_label = ttk.Label(self, textvariable=self.ans_string,
                                font=("TkDefaultFont", 59), wraplength=600)
         ans_label.config(background='orange')
-        n_sum_button = ttk.Button(self, text="mathplosion",command=self.math_it)
+        n_sum_button = ttk.Button(self, text="calculate",command=self.math_it)
         save_button = ttk.Button(self, text = "save data",command = self.save_it)
 
         #Layout form
@@ -53,7 +54,6 @@ class HelloView(tk.Frame):
     def on_change(self):
         if self.name.get().strip():
             self.hello_string.set("Hello " + self.name.get())
-            self.ans_string.set("testing answer label")
         else:
             self.hello_string.set("")
 
@@ -66,14 +66,13 @@ class HelloView(tk.Frame):
         else:
             self.ans_string.set("")
     def save_it(self):
-        with open('data.txt','w') as f:
+        with open('data.csv','w') as csv_file:
             x = int(self.number_x.get())
             y = int(self.number_y.get())
             answer = x + y
-            f.write(f'Number {str(self.number_x)} and number {str(self.number_y)} equals {str(answer)}')
-
-
-
+            numbers = [f'{str(self.number_x)} and ', f'{str(self.number_y)} equals 'f'{str(answer)}/n']
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(numbers)
 
 class MyApplication(tk.Tk):
     """Hello World Main Application"""
